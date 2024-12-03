@@ -3,6 +3,8 @@ package com.example.filmsandseries
 import Api
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplicationtest.playlistjson
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -85,6 +87,20 @@ class MainViewModel : ViewModel() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+    }
+
+
+    //rècupère la playlist
+    fun fetchPlayslist(): Playlist {
+        val moshi = Moshi.Builder().build()
+        return moshi.adapter(Playlist::class.java).fromJson(playlistjson)!!
+    }
+
+    val musiques = MutableStateFlow<List<Playlist>>(listOf())
+    fun recupmusic() {
+        viewModelScope.launch {
+            musiques.value = listOf(fetchPlayslist())
         }
     }
 }
