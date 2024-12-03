@@ -47,6 +47,9 @@ class SeriesDest
 @Serializable
 class ActeursDest
 
+@Serializable
+class MusiqueDest
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchTopBar(viewModel: MainViewModel, currentDestination: String) {
@@ -167,6 +170,17 @@ class MainActivity : ComponentActivity() {
                                     selected = currentDestination?.hasRoute<ActeursDest>() == true,
                                     onClick = { navController.navigate(ActeursDest()) }
                                 )
+                                NavigationBarItem(
+                                    icon = {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.baseline_account_circle_24),
+                                            contentDescription = "music"
+                                        )
+                                    },
+                                    label = { Text("Musique") },
+                                    selected = currentDestination?.hasRoute<MusiqueDest>() == true,
+                                    onClick = { navController.navigate(MusiqueDest()) }
+                                )
                             }
                         }
                     }
@@ -191,6 +205,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<ActeursDest> {
                             ActeurScreen(viewModel = viewModel)
+                        }
+                        composable<MusiqueDest> {
+                            MusiqueScreen(viewModel = viewModel)
                         }
                         composable("FilmDetailScreen/{filmId}") { backStackEntry ->
                             val filmId = backStackEntry.arguments?.getString("filmId") ?: return@composable
