@@ -97,10 +97,10 @@ class MainViewModel : ViewModel() {
         return moshi.adapter(Playlist::class.java).fromJson(playlistjson)!!
     }
 
-    val musiques = MutableStateFlow<List<Playlist>>(listOf())
+    val tracks = MutableStateFlow<Playlist?>(null)
     fun recupmusic() {
         viewModelScope.launch {
-            musiques.value = listOf(fetchPlayslist())
+            tracks.value = fetchPlayslist()
         }
     }
 }

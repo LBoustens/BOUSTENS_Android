@@ -1,6 +1,7 @@
 package com.example.filmsandseries
 
 import FilmDetailScreen
+import MusiqueScreen
 import ProfileScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -173,7 +174,7 @@ class MainActivity : ComponentActivity() {
                                 NavigationBarItem(
                                     icon = {
                                         Icon(
-                                            painter = painterResource(id = R.drawable.baseline_account_circle_24),
+                                            painter = painterResource(id =  R.drawable.baseline_library_music_24),
                                             contentDescription = "music"
                                         )
                                     },
