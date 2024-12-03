@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -37,7 +39,8 @@ fun SeriesDetailScreen(viewModel: MainViewModel, serieId: String) {
                         .crossfade(true)
                         .build(),
                     contentDescription = "Affiche de la série",
-                    modifier = Modifier.height(300.dp)
+                    modifier = Modifier.height(200.dp)
+                        .align(alignment = Alignment.CenterHorizontally)
                 )
             }
             // Affichage des détails de la série
@@ -51,7 +54,7 @@ fun SeriesDetailScreen(viewModel: MainViewModel, serieId: String) {
             serieDetails?.credits?.cast?.let {
                 if (it.isNotEmpty()) {
                     Text("Acteurs principaux :", style = MaterialTheme.typography.bodyLarge)
-                    LazyColumn {
+                    LazyRow {
                         it.forEach { actor ->
                             item {
                                 ActorItem(actor)

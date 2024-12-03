@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +29,9 @@ fun FilmDetailScreen(viewModel: MainViewModel, filmId: String) {
     }
 
     if (filmDetails != null) {
-        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)) {
             // Affichage de l'affiche du film
             filmDetails?.poster_path?.let { path ->
                 val imageUrl = "https://image.tmdb.org/t/p/w500$path"
@@ -38,7 +41,8 @@ fun FilmDetailScreen(viewModel: MainViewModel, filmId: String) {
                         .crossfade(true)
                         .build(),
                     contentDescription = "Affiche du film",
-                    modifier = Modifier.height(300.dp)
+                    modifier = Modifier.height(200.dp)
+                        .align(alignment = Alignment.CenterHorizontally)
                 )
             }
             // Affichage des détails du film
@@ -52,7 +56,7 @@ fun FilmDetailScreen(viewModel: MainViewModel, filmId: String) {
             filmDetails?.credits?.cast?.let {
                 if (it.isNotEmpty()) {
                     Text("Acteurs principaux :", style = MaterialTheme.typography.bodyLarge)
-                    LazyColumn {
+                    LazyRow {
                         it.forEach { actor ->
                             item {
                             ActorItem(actor)}
